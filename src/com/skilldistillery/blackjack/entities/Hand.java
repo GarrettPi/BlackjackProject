@@ -3,7 +3,7 @@ package com.skilldistillery.blackjack.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hand {
+public class Hand {//comment
 
 	private List<Card> cards;
 
