@@ -37,12 +37,20 @@ public class Hand {// comment
 		return total;
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Hand: ");
+		for(int i =0; i < cards.size(); i++) {
+			sb.append(cards.get(i).toString());
+			if(i < cards.size()-1) sb.append(", ");
+		}
+		return sb.toString();
+	}
 	public boolean checkForBust() {
 		int handValue = 0;
 		for (Card card : cards) {
 			handValue += card.getValue();
 		}
-		System.out.println(handValue);
 		if (handValue > 21)
 			return true;
 		else

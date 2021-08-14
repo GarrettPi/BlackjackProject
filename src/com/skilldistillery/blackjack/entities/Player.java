@@ -3,14 +3,12 @@ package com.skilldistillery.blackjack.entities;
 public class Player {
 
 	private Hand hand;
-	private Dealer dealer;
 	
 	{
 		hand = new Hand();
 	}
 	
-	public Player(Dealer dealer) {
-		this.dealer = dealer;
+	public Player() {
 	}
 	
 	public Hand getHand() {

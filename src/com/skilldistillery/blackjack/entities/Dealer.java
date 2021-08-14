@@ -5,15 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Dealer {
-	private Scanner scanner = new Scanner(System.in);
 	private Hand hand;
 	private Deck deck;
-	private List<Card> dealtCards;
+	private List<Card> discards;
 
 	{
 		deck = new Deck();
 		hand = new Hand();
-		dealtCards = new ArrayList<>();
+		discards = new ArrayList<>();
 	}
 
 	public Deck getDeck() {
@@ -23,10 +22,11 @@ public class Dealer {
 	public Hand getHand() {
 		return hand;
 	}
+	
 
 	public Card dealCard() {
 		Card card = deck.dealCard();
-		dealtCards.add(card);
+		discards.add(card);
 		return card;
 	}
 
@@ -38,10 +38,8 @@ public class Dealer {
 		hand.addCard(card);
 	}
 	
-	public boolean determineToHitOrToStay() {
-		System.out.println("Dealers cards: ");
-		for (Card card : hand.getCards())
-			System.out.println(card);
+	public boolean determineToHitOrToStay(Scanner scanner) {
+		System.out.println("Dealers "+hand.toString());
 		int curHandValue = hand.calculateHandTotal();
 		System.out.println("\nThe dealers hand's value is "+curHandValue);
 		if(curHandValue > 16 && curHandValue < 22) {
@@ -61,8 +59,8 @@ public class Dealer {
 	}
 	
 	public void reshuffle() {
-		deck.deckGenerator();
-		deck.shuffle();
+		deck.reShuffle(discards);
+		discards.clear();
 		
 	}
 	public void cleanUp() {

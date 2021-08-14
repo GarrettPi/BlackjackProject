@@ -7,7 +7,6 @@ public class BlackJackApp {
 
 	private Player player;
 	private Dealer dealer;
-	private boolean quit = false;
 	private boolean gameOver = false;
 	Scanner scanner = new Scanner(System.in);
 
@@ -20,12 +19,12 @@ public class BlackJackApp {
 
 	private void setupPlayers() {
 		dealer = new Dealer();
-		player = new Player(dealer);
+		player = new Player();
 	}
 
 	private void setupDeck() {
 		dealer.getDeck().shuffle();
-		getStartingCards();
+//		getStartingCards();
 	}
 
 	private void getStartingCards() {
@@ -39,8 +38,9 @@ public class BlackJackApp {
 
 	private void run() {
 		while (true) {
+			getStartingCards();
+			displayHandTotals();
 			while (!gameOver) {
-				displayHandTotals();
 				processInput();
 			}
 			displayWinner();
@@ -50,16 +50,17 @@ public class BlackJackApp {
 	}
 
 	private void displayHandTotals() {
-		int dealerTot = dealer.getHand().calculateDealerHandTotal();
+//		int dealerTot = dealer.getHand().calculateDealerHandTotal();
 		int playerTot = player.getHand().calculateHandTotal();
-		System.out.println("The dealer has " + dealerTot);
-		System.out.println("You have " + playerTot);
+//		System.out.println("The dealer has " + dealerTot);
+		System.out.println("Your "+player.getHand().toString());
+		System.out.println("Hand Value: " + playerTot);
 	}
 
 	private void processInput() {
 		boolean correct = true;
 		do {
-			System.out.println("Would you like to hit or stay?");
+			System.out.println("\nWould you like to hit or stay?");
 			String input = scanner.nextLine().toUpperCase();
 			switch (input) {
 			case "HIT":
@@ -81,7 +82,7 @@ public class BlackJackApp {
 	}
 
 	private void stay() {
-		System.out.println("stay");
+		System.out.println("You chose to stay at "+player.getHand().calculateHandTotal());
 		dealerFinishesGame();
 	}
 
@@ -89,6 +90,7 @@ public class BlackJackApp {
 		System.out.println("You chose to hit");
 		Card card = dealer.dealCard();
 		player.addCard(card);
+		displayHandTotals();
 		if (player.getHand().checkForBust()) {
 			gameOver = true;
 		}
@@ -96,7 +98,7 @@ public class BlackJackApp {
 
 	public void dealerFinishesGame() {
 		while (!gameOver) {
-			gameOver = dealer.determineToHitOrToStay();
+			gameOver = dealer.determineToHitOrToStay(scanner);
 		}
 
 	}
@@ -111,10 +113,10 @@ public class BlackJackApp {
 				System.out.println("Dealer wins");
 		} else if (playerHandValue == dealerHandValue) {
 			System.out.println("It's a push.  No winner.\n");
-		} else if (playerHandValue > 21) {
+		} else if (player.getHand().checkForBust()) {
 			System.out.println("You bust!  Dealer wins.\n");
-		} else if (dealerHandValue > 21) {
-			System.out.println("Dealer bust!  You win!\n");
+		} else if (dealer.getHand().checkForBust()) {
+			System.out.println("Dealer busts!  You win!\n");
 		}
 	}
 
@@ -123,7 +125,6 @@ public class BlackJackApp {
 		while (!correct) {
 			System.out.println("\nWould you like to keep playing : Yes or No ");
 			String input = scanner.nextLine().toUpperCase();
-			System.out.println(input);
 			switch (input) {
 			case "Yes":
 			case "Y":
@@ -132,6 +133,7 @@ public class BlackJackApp {
 			case "NO":
 			case "N":
 				System.out.println("Thanks for playing Blackjack!");
+				scanner.close();
 				System.exit(1);
 				break;
 			default:
@@ -147,6 +149,6 @@ public class BlackJackApp {
 		dealer.reshuffle();
 		player.cleanUp();
 		dealer.cleanUp();
-		getStartingCards();
+//		getStartingCards();
 	}
 }

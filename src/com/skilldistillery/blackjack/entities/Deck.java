@@ -33,4 +33,9 @@ public class Deck {
 		Collections.shuffle(deck);
 	}
 
+	public void reShuffle(List<Card> discards) {
+		deck.addAll(discards);
+		shuffle();
+	}
+
 }
