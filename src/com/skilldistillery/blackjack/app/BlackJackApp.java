@@ -33,12 +33,17 @@ public class BlackJackApp {
 			player.addCard(card);
 			card = dealer.dealCard();
 			dealer.addCard(card);
-		}
+		} 
 	}
 
 	private void run() {
 		while (true) {
 			getStartingCards();
+			if(checkForBlackjack()) {
+				continueGame();
+				cleanUp();
+				continue;
+			}
 			displayHandTotals();
 			while (!gameOver) {
 				processInput();
@@ -46,6 +51,18 @@ public class BlackJackApp {
 			displayWinner();
 			continueGame();
 			cleanUp();
+		}
+	}
+	
+	public boolean checkForBlackjack() {
+		if(player.getHand().checkForBlackjack() && !dealer.getHand().checkForBlackjack()) {
+			System.out.println("Blackjack, 21!  You win.");
+			return true;
+		} else if(player.getHand().checkForBlackjack() && dealer.getHand().checkForBlackjack()) {
+			System.out.println("Both you and the dealer have Blackjack.  Tough luck.  It's a push");
+			return true;
+		} else {
+			return false;
 		}
 	}
 

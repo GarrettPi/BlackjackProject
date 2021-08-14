@@ -40,12 +40,14 @@ public class Hand {// comment
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Hand: ");
-		for(int i =0; i < cards.size(); i++) {
+		for (int i = 0; i < cards.size(); i++) {
 			sb.append(cards.get(i).toString());
-			if(i < cards.size()-1) sb.append(", ");
+			if (i < cards.size() - 1)
+				sb.append(", ");
 		}
 		return sb.toString();
 	}
+
 	public boolean checkForBust() {
 		int handValue = 0;
 		for (Card card : cards) {
@@ -56,8 +58,26 @@ public class Hand {// comment
 		else
 			return false;
 	}
-	
+
 	public void cleanUp() {
 		cards.removeAll(cards);
+	}
+
+	public boolean checkForAce() {
+		for (Card card : cards) {
+			if (card.getRank() == Rank.ACE) {
+				System.out.println("Ace ace ace");
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkForBlackjack() {
+		if(calculateHandTotal() == 21) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
