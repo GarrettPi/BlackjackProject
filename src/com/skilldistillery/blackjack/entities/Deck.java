@@ -9,6 +9,10 @@ public class Deck {
 	private List<Card> deck;
 
 	public Deck() {
+		deckGenerator();
+	}
+
+	public void deckGenerator() {
 		deck = new ArrayList<>();
 		for (Suit suit : Suit.values()) {
 			for (Rank rank : Rank.values()) {
@@ -28,4 +32,5 @@ public class Deck {
 	public void shuffle() {
 		Collections.shuffle(deck);
 	}
+
 }

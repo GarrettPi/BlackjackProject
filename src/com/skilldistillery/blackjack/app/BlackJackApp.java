@@ -8,27 +8,29 @@ public class BlackJackApp {
 	private Player player;
 	private Dealer dealer;
 	private boolean quit = false;
+	private boolean gameOver = false;
 	Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		BlackJackApp bja = new BlackJackApp();
-		bja.setup();
+		bja.setupPlayers();
+		bja.setupDeck();
 		bja.run();
 	}
 
-	private void setup() {
+	private void setupPlayers() {
 		dealer = new Dealer();
 		player = new Player(dealer);
+	}
 
+	private void setupDeck() {
 		dealer.getDeck().shuffle();
 		getStartingCards();
-
 	}
 
 	private void getStartingCards() {
 		for (int i = 0; i < 2; i++) {
 			Card card = dealer.dealCard();
-//			System.out.println("The dealer deals you a " + card);
 			player.addCard(card);
 			card = dealer.dealCard();
 			dealer.addCard(card);
@@ -36,9 +38,13 @@ public class BlackJackApp {
 	}
 
 	private void run() {
-		while (!quit) {
-			displayHandTotals();
-			processInput();
+		while (true) {
+			while (!gameOver) {
+				displayHandTotals();
+				processInput();
+			}
+			displayWinner();
+			cleanUp();
 		}
 	}
 
@@ -75,12 +81,50 @@ public class BlackJackApp {
 
 	private void stay() {
 		System.out.println("stay");
+		dealerFinishesGame();
 	}
 
 	private void hit() {
 		System.out.println("You chose to hit");
 		Card card = dealer.dealCard();
-		player.getHand().addCard(card);
+		player.addCard(card);
+		if (player.getHand().checkForBust()) {
+			gameOver = true;
+		}
 	}
 
+	public void dealerFinishesGame() {
+		while (!gameOver) {
+			gameOver = dealer.determineToHitOrToStay();
+			System.out.println("Press enter to continue");
+			scanner.nextLine();
+		}
+
+	}
+
+	public void displayWinner() {
+		int playerHandValue = player.getHand().calculateHandTotal();
+		int dealerHandValue = dealer.getHand().calculateHandTotal();
+		if (playerHandValue <= 21 && dealerHandValue <= 21 && playerHandValue != dealerHandValue) {
+			if (playerHandValue > dealerHandValue)
+				System.out.println("You win");
+			else
+				System.out.println("Dealer wins");
+		} else if (playerHandValue == dealerHandValue) {
+			System.out.println("It's a push.  No winner.\n");
+		} else if (playerHandValue > 21) {
+			System.out.println("You bust!  Dealer wins.\n");
+		} else if (dealerHandValue > 21) {
+			System.out.println("Dealer bust!  You win!\n");
+		}
+	}
+
+	public void cleanUp() {
+		System.out.println("\nCleaning up the cards and reshuffling!\n");
+		gameOver = false;
+		dealer.reshuffle();
+		player.cleanUp();
+		dealer.cleanUp();
+		getStartingCards();
+	}
 }

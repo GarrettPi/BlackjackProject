@@ -22,5 +22,9 @@ public class Player {
 		hand.addCard(card);
 	}
 	
+	public void cleanUp() {
+		hand.cleanUp();
+	}
+	
 	
 }
