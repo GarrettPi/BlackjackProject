@@ -96,8 +96,6 @@ public class BlackJackApp {
 	public void dealerFinishesGame() {
 		while (!gameOver) {
 			gameOver = dealer.determineToHitOrToStay();
-			System.out.println("Press enter to continue");
-			scanner.nextLine();
 		}
 
 	}
