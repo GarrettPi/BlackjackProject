@@ -46,7 +46,8 @@ public class BlackJackApp {
 			}
 			displayHandTotals();
 			while (!gameOver) {
-				processInput();
+				if(!player.getHand().checkForSplit()) processInput();
+				else processSplitInput();
 			}
 			displayWinner();
 			continueGame();
@@ -77,7 +78,7 @@ public class BlackJackApp {
 	private void processInput() {
 		boolean correct = true;
 		do {
-			System.out.println("\nWould you like to hit or stay?");
+			System.out.println("\nWould you like to hit(h) or stay(s)?");
 			String input = scanner.nextLine().toUpperCase();
 			switch (input) {
 			case "HIT":
@@ -89,6 +90,33 @@ public class BlackJackApp {
 			case "S":
 				correct = true;
 				stay();
+				break;
+			default:
+				correct = false;
+				System.out.println(
+						"Please choose to either Hit: receive a new card; " + "or Stay: go with your current total");
+			}
+		} while (!correct);
+	}
+	private void processSplitInput() {
+		boolean correct = true;
+		do {
+			System.out.println("\nWould you like to hit(h), stay(S), or split(p)?");
+			String input = scanner.nextLine().toUpperCase();
+			switch (input) {
+			case "HIT":
+			case "H":
+				correct = true;
+				hit();
+				break;
+			case "STAY":
+			case "S":
+				correct = true;
+				stay();
+				break;
+			case "SPLIT":
+			case "P":
+				player.split();
 				break;
 			default:
 				correct = false;

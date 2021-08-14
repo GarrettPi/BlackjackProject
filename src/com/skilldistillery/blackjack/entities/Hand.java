@@ -72,12 +72,24 @@ public class Hand {// comment
 		}
 		return false;
 	}
-	
+
 	public boolean checkForBlackjack() {
-		if(calculateHandTotal() == 21) {
+		if (calculateHandTotal() == 21) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	public boolean checkForSplit() {
+		if (cards.size() == 2 && cards.get(0).getRank() == cards.get(1).getRank()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void split() {
+		
 	}
 }

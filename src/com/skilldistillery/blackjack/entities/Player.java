@@ -3,6 +3,7 @@ package com.skilldistillery.blackjack.entities;
 public class Player {
 
 	private Hand hand;
+	private Hand splitHand;
 	
 	{
 		hand = new Hand();
@@ -24,5 +25,8 @@ public class Player {
 		hand.cleanUp();
 	}
 	
-	
+	public void split() {
+		splitHand = new Hand();
+		splitHand.getCards().add(hand.getCards().remove(0));
+	}
 }
