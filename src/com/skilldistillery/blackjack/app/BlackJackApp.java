@@ -44,6 +44,7 @@ public class BlackJackApp {
 				processInput();
 			}
 			displayWinner();
+			continueGame();
 			cleanUp();
 		}
 	}
@@ -115,6 +116,29 @@ public class BlackJackApp {
 		} else if (dealerHandValue > 21) {
 			System.out.println("Dealer bust!  You win!\n");
 		}
+	}
+
+	private void continueGame() {
+		boolean correct = false;
+		while (!correct) {
+			System.out.println("\nWould you like to keep playing : Yes or No ");
+			String input = scanner.nextLine().toUpperCase();
+			System.out.println(input);
+			switch (input) {
+			case "Yes":
+			case "Y":
+				correct = true;
+				break;
+			case "NO":
+			case "N":
+				System.out.println("Thanks for playing Blackjack!");
+				System.exit(1);
+				break;
+			default:
+//				correct = false;
+				System.out.println("Not a valid selection.  Please try again.");
+			}
+		} 
 	}
 
 	public void cleanUp() {
