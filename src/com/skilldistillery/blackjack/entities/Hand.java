@@ -10,12 +10,29 @@ public class Hand {//comment
 	public Hand() {
 		cards = new ArrayList<>();
 	}
-
-	public void displayHand() {
-
+	
+	public List<Card> getCards(){
+		return cards;
 	}
 
 	public void addCard(Card card) {
-
+		cards.add(card);
+	}
+	
+	public int calculateHandTotal() {
+		int total = 0;
+		for(Card card : cards) {
+			total+=card.getValue();
+		}
+		return total;
+	}
+	
+	public int calculateDealerHandTotal() {
+		int total = 0;
+		for(int i = 0; i<cards.size(); i++) {
+			if(i>0) {
+				total+=cards.get(i).getValue();
+			}
+		}return total;
 	}
 }

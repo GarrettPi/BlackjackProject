@@ -15,7 +15,6 @@ public class Deck {
 				deck.add(new Card(rank, suit));
 			}
 		}
-		Collections.shuffle(deck);
 	}
 
 	public int checkDeckSize() {

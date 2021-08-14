@@ -2,43 +2,31 @@ package com.skilldistillery.blackjack.entities;
 
 public class Dealer {
 
-	private Deck deck;
 	private Hand hand;
+	private Deck deck;
 
 	{
-		hand = new Hand();
 		deck = new Deck();
-	}
-
-	public void checkForHitOrStay() {
-
-	}
-
-	public Card dealCard() {
-		return deck.dealCard();
-	}
-	public void dealSelf() {
-		hand.addCard(dealCard());
-	}
-
-	public void dealCards(Deck deck) {
-
+		hand = new Hand();
 	}
 
 	public Deck getDeck() {
 		return deck;
 	}
 
-	public void setDeck(Deck deck) {
-		this.deck = deck;
-	}
-
 	public Hand getHand() {
 		return hand;
 	}
 
-	public void setHand(Hand hand) {
-		this.hand = hand;
+	public Card dealCard() {
+		return deck.dealCard();
 	}
 
+	public void addCard(Card card) {
+		if(hand.getCards().size()>0)
+		System.out.println("The dealer deals himself a " + card);
+		else
+			System.out.println("The dealer deals himself a facedown card");
+		hand.addCard(card);
+	}
 }
