@@ -89,7 +89,4 @@ public class Hand {// comment
 		}
 	}
 	
-	public void split() {
-		
-	}
 }
