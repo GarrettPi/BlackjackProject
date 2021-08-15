@@ -33,33 +33,34 @@ public class BlackJackApp {
 			player.addCard(card);
 			card = dealer.dealCard();
 			dealer.addCard(card);
-		} 
+		}
 	}
 
 	private void run() {
 		while (true) {
 			getStartingCards();
-			if(checkForBlackjack()) {
+			if (checkForBlackjack()) {
 				continueGame();
 				cleanUp();
 				continue;
 			}
 			displayHandTotals();
 			while (!gameOver) {
-				if(!player.getHand().checkForSplit()) processInput();
-				else processSplitInput();
+//				if(!player.getHand().checkForSplit()) 
+				processInput();
+//				else processSplitInput();
 			}
 			displayWinner();
 			continueGame();
 			cleanUp();
 		}
 	}
-	
+
 	public boolean checkForBlackjack() {
-		if(player.getHand().checkForBlackjack() && !dealer.getHand().checkForBlackjack()) {
+		if (player.getHand().checkForBlackjack() && !dealer.getHand().checkForBlackjack()) {
 			System.out.println("Blackjack, 21!  You win.");
 			return true;
-		} else if(player.getHand().checkForBlackjack() && dealer.getHand().checkForBlackjack()) {
+		} else if (player.getHand().checkForBlackjack() && dealer.getHand().checkForBlackjack()) {
 			System.out.println("Both you and the dealer have Blackjack.  Tough luck.  It's a push");
 			return true;
 		} else {
@@ -71,7 +72,7 @@ public class BlackJackApp {
 //		int dealerTot = dealer.getHand().calculateDealerHandTotal();
 		int playerTot = player.getHand().calculateHandTotal();
 //		System.out.println("The dealer has " + dealerTot);
-		System.out.println("Your "+player.getHand().toString());
+		System.out.println("Your " + player.getHand().toString());
 		System.out.println("Hand Value: " + playerTot);
 	}
 
@@ -98,6 +99,7 @@ public class BlackJackApp {
 			}
 		} while (!correct);
 	}
+
 	private void processSplitInput() {
 		boolean correct = true;
 		do {
@@ -127,7 +129,7 @@ public class BlackJackApp {
 	}
 
 	private void stay() {
-		System.out.println("You chose to stay at "+player.getHand().calculateHandTotal());
+		System.out.println("You chose to stay at " + player.getHand().calculateHandTotal());
 		dealerFinishesGame();
 	}
 
@@ -185,11 +187,13 @@ public class BlackJackApp {
 //				correct = false;
 				System.out.println("Not a valid selection.  Please try again.");
 			}
-		} 
+		}
 	}
 
 	public void cleanUp() {
-		System.out.println("\nCleaning up the cards and reshuffling!\n");
+		System.out.println(
+				"\nCleaning up the cards and reshuffling!\nPress enter to continue...\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		scanner.nextLine();
 		gameOver = false;
 		dealer.reshuffle();
 		player.cleanUp();
