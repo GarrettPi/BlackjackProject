@@ -46,9 +46,7 @@ public class BlackJackApp {
 			}
 			displayHandTotals();
 			while (!gameOver) {
-//				if(!player.getHand().checkForSplit()) 
 				processInput();
-//				else processSplitInput();
 			}
 			displayWinner();
 			continueGame();
