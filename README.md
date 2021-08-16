@@ -27,7 +27,12 @@ Once the dealer has completed his turn, the hand values are compared and the win
 
 
 ### Technologies
-* Object Oriented Programming
 
+* Object Oriented Programming
+* Encapsulation and Single Responsibility
+* Custom classes
+* Collections
 
 ### Lessons Learned
+
+This project was a humbling experience.  In the other projects I've completed for the course, I was able to implement all of the stretch goals with ease and I assumed this project would be the same.  So in my initial planning and coding stages, I was building a program that had the stretch goals implemented from the beginning.  When my time ran down and I was not able to complete the project as it stood, I had to spend some serious time refactoring and removing useless(or obstructive) bits of code in order to get the program working and stable.  So the lesson I learned can be simplified down to that old adage, "Don't bit off more than you can chew".  I did but fortunately I was able to scale down in time and have a working product ready for submission on time.
