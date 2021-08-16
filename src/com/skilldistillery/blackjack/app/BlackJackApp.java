@@ -72,6 +72,7 @@ public class BlackJackApp {
 		System.out.println("==============================================");
 		System.out.println("Your " + player.getHand().toString());
 		System.out.println("Hand Value: " + playerTot);
+		System.out.println("==============================================");
 	}
 
 	private void processInput() {
@@ -127,7 +128,6 @@ public class BlackJackApp {
 	}
 
 	private void stay() {
-		System.out.println("--------------------------------------");
 		System.out.println("You chose to stay at " + player.getHand().calculateHandTotal());
 		System.out.println("--------------------------------------");
 		dealerFinishesGame();
