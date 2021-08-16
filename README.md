@@ -21,10 +21,13 @@ The program will display the cards you've been dealt along with the total hand v
 After you have stayed, the dealer will begin his turn.
 
 The dealer has the same options as the player: **Hit** or **Stay**.
-if the 
+If the dealer has a hand value of 16 or lower, he is required to hit.  Otherwise, he must stay.  
+
+Once the dealer has completed his turn, the hand values are compared and the winner is displayed.  In the event of a draw, both the player and the dealer have the same hand value at the end of the game.  This results in a push, and no winner is declared.
 
 
 ### Technologies
+* Object Oriented Programming
 
 
 ### Lessons Learned
