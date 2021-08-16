@@ -24,22 +24,12 @@ public class BlackJackApp {
 
 	private void setupDeck() {
 		dealer.getDeck().shuffle();
-//		getStartingCards();
-	}
-
-	private void getStartingCards() {
-		for (int i = 0; i < 2; i++) {
-			Card card = dealer.dealCard();
-			player.addCard(card);
-			card = dealer.dealCard();
-			dealer.addCard(card);
-		}
 	}
 
 	private void run() {
 		System.out.println("Welcome to Blackjack!  Press enter to start the first hand!");
 		scanner.nextLine();
-		while (true) {
+		while (true) { //pretty happy with this main game loop.  Slick.
 			getStartingCards();
 			if (checkForBlackjack()) {
 				continueGame();
@@ -56,6 +46,15 @@ public class BlackJackApp {
 		}
 	}
 
+	private void getStartingCards() {
+		for (int i = 0; i < 2; i++) {
+			Card card = dealer.dealCard();
+			player.addCard(card);
+			card = dealer.dealCard();
+			dealer.addCard(card);
+		}
+	}
+
 	public boolean checkForBlackjack() {
 		if (player.getHand().checkForBlackjack() && !dealer.getHand().checkForBlackjack()) {
 			System.out.println("Blackjack, 21!  You win.");
@@ -69,9 +68,7 @@ public class BlackJackApp {
 	}
 
 	private void displayHandTotals() {
-//		int dealerTot = dealer.getHand().calculateDealerHandTotal();
 		int playerTot = player.getHand().calculateHandTotal();
-//		System.out.println("The dealer has " + dealerTot);
 		System.out.println("==============================================");
 		System.out.println("Your " + player.getHand().toString());
 		System.out.println("Hand Value: " + playerTot);
@@ -100,7 +97,7 @@ public class BlackJackApp {
 			}
 		} while (!correct);
 	}
-
+	// could not complete in time, will finish on my own for fun
 	private void processSplitInput() {
 		boolean correct = true;
 		do {
@@ -130,7 +127,9 @@ public class BlackJackApp {
 	}
 
 	private void stay() {
+		System.out.println("--------------------------------------");
 		System.out.println("You chose to stay at " + player.getHand().calculateHandTotal());
+		System.out.println("--------------------------------------");
 		dealerFinishesGame();
 	}
 
@@ -185,7 +184,6 @@ public class BlackJackApp {
 				System.exit(1);
 				break;
 			default:
-//				correct = false;
 				System.out.println("Not a valid selection.  Please try again.");
 			}
 		}
@@ -199,6 +197,5 @@ public class BlackJackApp {
 		dealer.reshuffle();
 		player.cleanUp();
 		dealer.cleanUp();
-//		getStartingCards();
 	}
 }

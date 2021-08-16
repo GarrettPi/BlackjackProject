@@ -41,7 +41,9 @@ public class Dealer {
 	public boolean determineToHitOrToStay(Scanner scanner) {
 		System.out.println("Dealers "+hand.toString());
 		int curHandValue = hand.calculateHandTotal();
+		System.out.println("--------------------------------------");
 		System.out.println("\nThe dealers hand's value is "+curHandValue);
+		System.out.println("--------------------------------------");
 		if(curHandValue > 16 && curHandValue < 22) {
 			System.out.println("Dealer stays.");
 			System.out.println("Press enter to see who wins!");
