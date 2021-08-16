@@ -37,6 +37,8 @@ public class BlackJackApp {
 	}
 
 	private void run() {
+		System.out.println("Welcome to Blackjack!  Press enter to start the first hand!");
+		scanner.nextLine();
 		while (true) {
 			getStartingCards();
 			if (checkForBlackjack()) {
@@ -70,6 +72,7 @@ public class BlackJackApp {
 //		int dealerTot = dealer.getHand().calculateDealerHandTotal();
 		int playerTot = player.getHand().calculateHandTotal();
 //		System.out.println("The dealer has " + dealerTot);
+		System.out.println("==============================================");
 		System.out.println("Your " + player.getHand().toString());
 		System.out.println("Hand Value: " + playerTot);
 	}
@@ -132,7 +135,7 @@ public class BlackJackApp {
 	}
 
 	private void hit() {
-		System.out.println("You chose to hit");
+		System.out.println("You chose to hit\n");
 		Card card = dealer.dealCard();
 		player.addCard(card);
 		displayHandTotals();
